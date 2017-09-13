@@ -1,0 +1,18 @@
+- if !@presenter.nil?
+  = render 'presenters/new' , remote: true
+  
+
+div id="general-form" class="modal-dialog modal-content modal-body"
+  = simple_form_for @workshop, remote: true do |form|
+    = render 'error_messages'
+    = form.input :title, class: 'form-control'
+    = form.input :date
+    = form.association :presenters, as: :select
+    = form.simple_fields_for :presenters do |p|
+      = p.input :name
+      = p.input :position
+    = form.input :goals, input_html: { cols: 100, rows: 6 }
+    = form.input :skills
+    = form.button :submit,'Submit', class: 'submit', id: "add-item"
+    = link_to 'Cancel', workshops_admin_home_path,class: 'btn btn-default', remote: true
+         

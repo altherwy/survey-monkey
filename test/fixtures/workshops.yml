@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  date: 2017-08-22
+  goals: MyString
+  skills: MyString
+
+two:
+  title: MyString
+  date: 2017-08-22
+  goals: MyString
+  skills: MyString

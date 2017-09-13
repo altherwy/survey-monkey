@@ -1,0 +1,10 @@
+- if @presenter.errors.any?
+  #error_explanation
+    .alert.alert-danger
+      |  The form contains 
+      = pluralize(@presenter.errors.count, "error")
+      | . 
+    ul
+      - @presenter.errors.full_messages.each do |msg|
+        li
+          = msg

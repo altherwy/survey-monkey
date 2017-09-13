@@ -1,0 +1,14 @@
+#general-form.modal-dialog.modal-content.modal-body
+  = simple_format(@workshop.title)
+  = @workshop.date
+  = simple_format("<h4>Goals: </h4>" + @workshop.goals)
+  = simple_format("<h4>Skills: </h4>" + @workshop.skills)
+  - if !@workshop.presenters.empty?
+    = simple_format("<h4> Presenters: </h4>") 
+    - @workshop.presenters.each do |x|
+      = simple_format(x.name + " -  " + x.position)
+  - isCurrent = @workshop.current
+  - if (isCurrent == true)
+   = link_to  subscribers_new_path(:id=>@workshop.id), class: 'btn btn-primary' do
+    i.glyphicon.glyphicon-pencil
+    |  Register 

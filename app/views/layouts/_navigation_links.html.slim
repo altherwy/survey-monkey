@@ -1,0 +1,14 @@
+- # add navigation links to this file
+- if session[:admin]
+    li
+        =link_to t(:add_workshop), workshops_new_path, remote: true
+    li
+        =link_to t(:stat)
+    li
+        =link_to t(:add_user)
+- else
+    li
+        =link_to t(:admin_login), workshops_admin_home_path
+         
+li
+    =link_to t(:lang), url_for( :locale => t(:lang_template) )

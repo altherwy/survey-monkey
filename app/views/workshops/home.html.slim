@@ -1,0 +1,15 @@
+h3
+  |
+    Current Workshops
+= render "table", locals: {workshop: @current_workshops}
+
+h3
+  |
+    Upcoming Workshops
+= render "table", locals: {workshop: @upcoming_workshops}    
+
+h3
+  |
+    Past Workshops
+= render "table", locals: {workshop: @past_workshops}       
+div id="show_single_record_modal"
