@@ -15,10 +15,24 @@ class WorkshopsController < ApplicationController
       else
           render action: 'new'
       end
+  end 
+  
+  def show
+    @workshop = Workshop.find(params[:id])
   end
 
-  def update
+  def edit
+    @workshop = Workshop.find(params[:id])
   end
+  
+  def update
+      @workshop = Workshop.find(params[:id])
+      if @workshop.update_attributes(secure_params)
+        redirect_to workshops_admin_home_path
+      else
+        render 'edit'
+      end
+    end
 
   def delete
   end
@@ -35,11 +49,16 @@ class WorkshopsController < ApplicationController
       
       session[:admin] = true
       Workshop.all
+      @upcoming_workshops = Workshop.where(upcoming: true).order(sort_column+ " " + sort_direction)
+      @current_workshops = Workshop.where(current: true).order(sort_column+ " " + sort_direction)
+      @past_workshops = Workshop.where(current: false, upcoming: false).order(sort_column+ " " + sort_direction)
   end
   
   
   def show_single_record
       @workshop = Workshop.find(params[:id])
+      @show_single_record_admin = params[:show_single_record_admin]
+      
   end
   
   private

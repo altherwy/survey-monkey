@@ -1,2 +1,21 @@
+h3
+  |
+    Current Workshops
+= render "admin_table", locals: {workshop: @current_workshops}
+
+h3
+  |
+    Upcoming Workshops
+= render "admin_table", locals: {workshop: @upcoming_workshops}    
+
+h3
+  |
+    Past Workshops
+= render "admin_table", locals: {workshop: @past_workshops}       
+// showing the details 
+div id="show_single_record_modal"
+
+
+// for adding a workshop
 div id="workshops-modal"
          

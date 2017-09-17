@@ -13,15 +13,11 @@ Rails.application.routes.draw do
   
   # Workshop
 
-  get 'workshops/new'
-  post 'workshops', to: 'workshops#create'
-
-  get 'workshops/update'
-
-  get 'workshops/delete'
-  
   get 'workshops/admin_home'
   get 'workshops/show_single_record'
+  resources :workshops
+  
+  
   
   root to: 'workshops#home'
 

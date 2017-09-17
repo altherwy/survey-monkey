@@ -1,0 +1,11 @@
+.table-responsive
+  table.table
+    thead
+      tr
+        th.col-xs-8= sortable "title"
+        th= sortable "date"
+    tbody
+      - locals[:workshop].each do |workshop|
+        tr
+          td= link_to workshop.title, workshops_show_single_record_path(id: workshop.id, show_single_record_admin: true), remote: true
+          td= workshop.date

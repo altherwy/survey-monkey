@@ -8,7 +8,12 @@
     - @workshop.presenters.each do |x|
       = simple_format(x.name + " -  " + x.position)
   - isCurrent = @workshop.current
-  - if (isCurrent == true)
+  - if (isCurrent == true and !@show_single_record_admin)
    = link_to  subscribers_new_path(:id=>@workshop.id), class: 'btn btn-primary' do
     i.glyphicon.glyphicon-pencil
     |  Register 
+  - if (@show_single_record_admin)
+   = link_to  edit_workshop_path(:id=>@workshop.id), class: 'btn btn-success' do
+     i.glyphicon.glyphicon-plus
+     |  Update 
+	    
