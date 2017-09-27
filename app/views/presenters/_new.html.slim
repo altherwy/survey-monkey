@@ -1,6 +1,8 @@
   div class="modal-dialog modal-content modal-body"
     = simple_form_for @presenter, remote: true do |form|
       = render 'error_messages'
-      = form.input :name, class: 'form-control'
-      = form.input :position
+      = form.input :name, label: "Presenter's Name", class: 'form-control'
+      = form.input :position, label: "Presenter's Position"
+      = form.input :for_edit, as: :hidden, input_html: {value: @for_edit}
+      = form.input :workshop_id, as: :hidden, input_html: {value: @workshop_id}
       = form.button :submit,'Submit', class: 'submit', id: "add-item"

@@ -1,12 +1,17 @@
+div id="workshops-modal"
 div id="general-form" class="modal-dialog modal-content modal-body"
   = simple_form_for @workshop do |form|
     = render 'error_messages'
     = form.input :title, class: 'form-control'
     = form.input :date
     = form.association :presenters, as: :select
-    = form.simple_fields_for :presenters do |p|
-      = p.input :name
-      = p.input :position
-    = form.input :goals, input_html: { cols: 100, rows: 6 }
-    = form.input :skills
+    = link_to "Add new Presenter" , presenters_new_path(workshop_id: @workshop.id, for_edit: true), remote: true
+    = form.input :goals, as: :text
+    = form.input :skills, as: :text
+    = form.collection_radio_buttons :current, 
+        [[true, 'Current'], [false, 'Upcoming']], 
+          :first, 
+          :last,
+          :item_wrapper_class => 'inline'
+    = simple_format(" ")
     = form.button :submit,'Update', class: 'submit'

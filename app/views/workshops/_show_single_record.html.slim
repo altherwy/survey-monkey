@@ -15,5 +15,13 @@
   - if (@show_single_record_admin)
    = link_to  edit_workshop_path(:id=>@workshop.id), class: 'btn btn-success' do
      i.glyphicon.glyphicon-plus
-     |  Update 
+     |  Update
+   = " "
+   = link_to workshop_path(@workshop) , method: :delete,  class: 'btn btn-danger' do
+     i class="glyphicon glyphicon-minus"
+     |  Delete
+   = " "
+   = link_to edit_all_path(id: @workshop.id), class: 'btn btn-primary' do
+     i.glyphicon.glyphicon-list
+     | Attendance
 	    

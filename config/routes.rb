@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   # Subscriber  
   get 'subscribers/new'
   post 'subscribers', to: "subscribers#create"
+  match 'subscribers/all/edit' => 'subscribers#edit_all', as: :edit_all, via: :get
+  match 'subscribers/all' => 'subscribers#update_all' , as: :update_all, via: :patch
 
   # Presenter
   get 'presenters/new'

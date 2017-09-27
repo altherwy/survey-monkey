@@ -5,11 +5,18 @@ class WorkshopsController < ApplicationController
     
   def new
       @workshop = Workshop.new
-      @presenter = Presenter.new
   end
   
   def create
       @workshop = Workshop.new(secure_params)
+     
+      var = params[:workshop][:current]
+      if var == "true"
+          
+          @workshop.upcoming = "f"
+      else
+          @workshop.upcoming = "t"
+      end
       if @workshop.save
           redirect_to workshops_admin_home_path
       else
@@ -27,6 +34,13 @@ class WorkshopsController < ApplicationController
   
   def update
       @workshop = Workshop.find(params[:id])
+       var = params[:workshop][:current]
+      if var == "true"
+          
+          @workshop.upcoming = "f"
+      else
+          @workshop.upcoming = "t"
+      end
       if @workshop.update_attributes(secure_params)
         redirect_to workshops_admin_home_path
       else
@@ -34,7 +48,10 @@ class WorkshopsController < ApplicationController
       end
     end
 
-  def delete
+  def destroy
+      @workshop = Workshop.find(params[:id]).destroy
+      
+      redirect_to workshops_admin_home_path
   end
   
   def home
@@ -63,9 +80,10 @@ class WorkshopsController < ApplicationController
   
   private
   
+    
+    
     def secure_params
-        params.require(:workshop).permit(:title,:date,:goals,:skills,:presenters_attributes => [:name,:position])
-        
+        params.require(:workshop).permit(:title,:date,:goals,:skills, :current, :upcoming , {presenter_ids: []})
     end
      def sort_column
         Workshop.column_names.include?(params[:sort]) ? params[:sort] : "id"

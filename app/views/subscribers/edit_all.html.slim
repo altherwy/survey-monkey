@@ -1,0 +1,16 @@
+= simple_form_for :subscriber, :url => update_all_path, html: {method: :patch} do |form|
+  .table-responsive
+    table.table
+      thead
+        tr
+          th.col-xs-8= "name"
+          th="position"
+          th= "attend"
+        - @subscribers.each do |subscriber|
+          = simple_fields_for "subscriber[]", subscriber do |subscriber_fields|
+            tbody
+              tr
+                td= subscriber_fields.input :name, label: false
+                td= subscriber_fields.input :position, label: false
+                td= subscriber_fields.input :attend , as: :boolean , label: false
+        = form.button :submit, 'Save', class: 'btn btn-primary'

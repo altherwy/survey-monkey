@@ -1,0 +1,23 @@
+div id="workshops-modal"
+div id="general-form" class="modal-dialog modal-content modal-body"
+  = simple_form_for @workshop, remote: true do |form|
+    = render 'error_messages'
+    = form.input :title, class: 'form-control'
+    = form.input :date
+    = form.association :presenters, collection: Presenter.order(id: :desc)
+    = form.simple_fields_for :presenters do |p|
+      = p.input :name
+      = p.input :position
+    = link_to "Add new Presenter" , presenters_new_path, remote: true
+    = form.input :goals, as: :text
+    = form.input :skills, as: :text
+    = form.collection_radio_buttons :current, 
+        [[true, 'Current'], [false, 'Upcoming']], 
+          :first, 
+          :last,
+          :item_wrapper_class => 'inline',
+          :checked => true
+    = simple_format(" ")
+    = form.button :submit,'Submit', class: 'btn btn-primary', id: "add-item"
+    = link_to 'Cancel', workshops_admin_home_path,class: 'btn btn-default', remote: true
+         
