@@ -57,6 +57,7 @@ class WorkshopsController < ApplicationController
   def home
       session[:admin] = false
       Workshop.all
+      move_to_past
       @upcoming_workshops = Workshop.where(upcoming: true).order(sort_column+ " " + sort_direction)
       @current_workshops = Workshop.where(current: true).order(sort_column+ " " + sort_direction)
       @past_workshops = Workshop.where(current: false, upcoming: false).order(sort_column+ " " + sort_direction)
@@ -66,9 +67,11 @@ class WorkshopsController < ApplicationController
       
       session[:admin] = true
       Workshop.all
+      move_to_past
       @upcoming_workshops = Workshop.where(upcoming: true).order(sort_column+ " " + sort_direction)
       @current_workshops = Workshop.where(current: true).order(sort_column+ " " + sort_direction)
       @past_workshops = Workshop.where(current: false, upcoming: false).order(sort_column+ " " + sort_direction)
+	
   end
   
   
@@ -91,5 +94,16 @@ class WorkshopsController < ApplicationController
   
      def sort_direction
         %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+     end
+     def move_to_past
+	@workshops = Workshop.all
+	@workshops.each do |workshop|
+		_date = workshop.date
+		if _date < Date.today
+		   workshop.upcoming = "f"
+		   workshop.current = "f"
+		   workshop.save
+		end		
+	end
      end
 end
