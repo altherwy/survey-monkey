@@ -5,7 +5,7 @@ application up and running.
 
 Things you may want to cover:
 
-* Move Workshops to Past
+* Move Workshops to Past (Done)
 * Admin Login Password
 * Hide forms after we're done with them
 * Refill input after adding a new presenter
